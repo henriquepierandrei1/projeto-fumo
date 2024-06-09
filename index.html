@@ -90,7 +90,22 @@
                 <div id="div-08" style="width: 90%;display: none;flex-direction: column;align-items: center;height: auto;margin: auto;background-color: rgb(228, 228, 225);box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.349);padding-bottom: 50px;">
                     <h2 style="font-size: 1.1em;font-weight: bold;text-align: center;"> Após analisarmos a sua situação, identificamos que você precisa livrar-se do seu vício, clique em <strong style="color: red;text-decoration: underline;">Dicas GRATUITAS</strong> e baixe o guia para você se livrar do vício!</h2>
                     <br>
-                    <a href="home.html" class="btn btn-danger" style="width: 95%;font-weight: bold;"onclick="showNextDiv(8)">Dicas GRATUITAS</a>
+                    <div class="container">
+                        <h2>Insira o seu email para receber o eBook</h2>
+                        <form id="contact-form">
+                            <input type="text" id="name" placeholder="Seu Nome" required>
+                            <input type="email" id="email" placeholder="Seu Email" required>
+                            <button type="submit" class="btn btn-success" onclick="showNextDiv(8)">Receber eBook</button>
+                        </form>
+                        <p id="status"></p>
+                    </div>
+
+                    <div id="div-09" style="width: 90%;display: none;flex-direction: column;align-items: center;height: auto;margin: auto;background-color: rgb(228, 228, 225);box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.349);padding-bottom: 50px;">
+                        <h2 style="font-size: 1.1em;font-weight: bold;text-align: center;"><strong style="color: red;text-decoration: underline;">Seu ebook</strong> chegará ao seu email! Caso queira a versão completa clique em <strong>Saiba Mais</strong></h2>
+                    <br>
+                    <button class="btn btn-danger" style="width: 95%;font-weight: bold;"onclick="showNextDiv(7)">Sim</button> 
+                
+                    <!-- <a href="home.html" class="btn btn-danger" style="width: 95%;font-weight: bold;"onclick="showNextDiv(8)">Dicas GRATUITAS</a> -->
                 </div>
 
                 
@@ -100,36 +115,50 @@
         </article>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showNextDiv(currentIndex) {
+            const currentDiv = document.getElementById(`div-0${currentIndex}`);
+            const nextDiv = document.getElementById(`div-0${currentIndex + 1}`);
+
+            if (currentDiv) {
+                currentDiv.style.display = 'none';
+            }
+
+            if (nextDiv) {
+                nextDiv.style.display = 'flex';
+            }
+        }
+    </script>
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init('J1WAR1aOBqILfZtCv'); // Substitua com seu Public Key do EmailJS
-        })();
-    </script>
-    <script type="text/javascript">
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Obtendo os valores do formulário
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var message = document.getElementById('message').value;
-
-            // Configurando os parâmetros do e-mail
-            var templateParams = {
-                from_name: name,
-                from_email: email,
-                message: message
-            };
-
-            // Enviando o e-mail
-            emailjs.send('service_bkmhdw9', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
-                    document.getElementById('status').innerText = 'E-mail enviado com sucesso!';
-                }, function(error) {
-                    document.getElementById('status').innerText = 'Erro ao enviar e-mail: ' + JSON.stringify(error);
-                });
-        });
-    </script>
+     <script type="text/javascript">
+         (function(){
+             emailjs.init('J1WAR1aOBqILfZtCv'); // Substitua com seu Public Key do EmailJS
+         })();
+     </script>
+     <script type="text/javascript">
+         document.getElementById('contact-form').addEventListener('submit', function(event) {
+             event.preventDefault();
+             
+             // Obtendo os valores do formulário
+             var name = document.getElementById('name').value;
+             var email = document.getElementById('email').value;
+ 
+             // Configurando os parâmetros do e-mail
+             var templateParams = {
+                 from_name: name,
+                 from_email: email,
+                 // Adicione outras variáveis de acordo com seu template, como o link de download do eBook
+             };
+ 
+             // Enviando o e-mail
+             emailjs.send('service_bkmhdw9', 'template_fe4mr2q', templateParams)
+                 .then(function(response) {
+                     document.getElementById('status').innerText = 'E-mail enviado com sucesso!';
+                 }, function(error) {
+                     document.getElementById('status').innerText = 'Erro ao enviar e-mail: ' + JSON.stringify(error);
+                 });
+         });
+     </script>
 </body>
 </html>
